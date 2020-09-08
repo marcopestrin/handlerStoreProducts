@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import { FETCH_PRODUCTS_LIST_REQUEST } from '../../redux/actions'
 import { selectorProduct } from "../../redux/selectors"
 
+import DeleteIcon from '@material-ui/icons/Delete';
+
 // componente REACT della lista dei prodotti
 export const ListProducts: FC = (props: any): JSX.Element => {
     const products = useSelector(selectorProduct);
@@ -27,19 +29,30 @@ export const ListProducts: FC = (props: any): JSX.Element => {
         <Table aria-label="customized table">
             <TableHead>
                 <TableRow>
-                    <TableCell>Category</TableCell>
-                    <TableCell>Description</TableCell>
-                    <TableCell>Price</TableCell>
-                    <TableCell>Title</TableCell>
+                    <TableCell>TITLE</TableCell>
+                    <TableCell>DESCRIPTION</TableCell>
+                    <TableCell>PRICE</TableCell>
+                    <TableCell>CATEGORY</TableCell>
+                    <TableCell>EMPLOYEE</TableCell>
+                    <TableCell>REVIEWS</TableCell>
+                    <TableCell>-</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
                 { products.length ? products.map((prod: any) => (
-                    <TableRow>
-                        <TableCell>{prod.data.category}</TableCell>
-                        <TableCell>{prod.data.description}</TableCell>
-                        <TableCell>{prod.data.price}</TableCell>
-                        <TableCell>{prod.data.title}</TableCell>
+                    <TableRow hover={true}>
+                        <TableCell size={"small"}>{prod.data.title}</TableCell>
+                        <TableCell size={"small"}>{prod.data.description}</TableCell>
+                        <TableCell size={"small"}>{prod.data.price}</TableCell>
+                        <TableCell size={"small"}>{prod.data.category}</TableCell>
+                        <TableCell size={"small"}>{prod.data.employee}</TableCell>
+                        <TableCell size={"small"}>{prod.data.description}</TableCell>
+                        <TableCell size={"small"}>
+                            <DeleteIcon
+                                fontSize="small"
+                                onClick={() => { alert('clicked') }}
+                            />
+                        </TableCell>
                     </TableRow>
                 )) :
                 <TableRow>
