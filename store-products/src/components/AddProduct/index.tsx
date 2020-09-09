@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux"
 import { selectorProduct } from "../../redux/selectors"
-import { ADD_ITEM_REQUEST } from '../../redux/actions'
+import { ADD_ITEM } from '../../redux/actions'
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,14 +21,24 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
+interface IFormInput {
+    title: string;
+    description: string;
+    price: number;
+    category: string;
+    employee: string;
+    reviews: string;
+}
+
 function AddProduct() {
     const classes = useStyles();
-    const { register, handleSubmit } = useForm();
-    const products = useSelector(selectorProduct);
+    const { register, handleSubmit } = useForm<IFormInput>();
+    // const products = useSelector(selectorProduct);
     const dispatch = useDispatch();
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: IFormInput) => {
+        console.log(data)
         dispatch({ 
-            type: ADD_ITEM_REQUEST,
+            type: ADD_ITEM,
             payload: data
         });
     }
@@ -39,7 +49,7 @@ function AddProduct() {
     >
         <TextField label="Title" variant="outlined" name="title" inputRef={register} />
         <TextField label="Description" variant="outlined" name="description" inputRef={register} />
-        <TextField label="Price" variant="outlined" name="price" inputRef={register} />
+        <TextField label="Price" variant="outlined" name="price" inputRef={register} type="Number" />
         <TextField label="Category" variant="outlined" name="category" inputRef={register} />
         <TextField label="Employee" variant="outlined" name="employee" inputRef={register} />
         <TextField label="Reviews" variant="outlined" name="reviews" inputRef={register} />

@@ -1,11 +1,7 @@
 import {
     FETCH_PRODUCTS_LIST_SUCCESS,
-    ADD_ITEM_REQUEST,
-    ADD_ITEM_SUCCESS
+    ADD_ITEM
  } from "./actions";
-
-// import { useDispatch } from "react-redux"
-// const dispatch = useDispatch();
 
 export const reducerProductsList = (prevState: any = {}, action: any) => {
     let clonedState = prevState
@@ -16,18 +12,11 @@ export const reducerProductsList = (prevState: any = {}, action: any) => {
             clonedState = action.payload;
             break;
 
-        case ADD_ITEM_SUCCESS:
-            break
-
-        case ADD_ITEM_REQUEST:
+        case ADD_ITEM:
             clonedState.push({
                 id: "EXAMPLEEE",
                 data: action.payload
-            })/*
-            dispatch({ 
-                type: ADD_ITEM_SUCCESS
-            });
-            */
+            })
             break;
 
         default:
