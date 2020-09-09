@@ -20,7 +20,6 @@ const rootReducer = combineReducers({
 });
 
 function* rootSaga() {
-  // da eseguire appena parte l'applicazione
   yield takeLatest(FETCH_PRODUCTS_LIST_REQUEST, getProductsList);
 }
 
