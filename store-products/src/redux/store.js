@@ -10,9 +10,7 @@ import { FETCH_PRODUCTS_LIST_REQUEST } from "./actions"
 const middlewareSaga = createSagaMiddleware();
 
 const initialState = {
-  products: { 
-    products: []
-  }
+  products: []
 };
 
 const rootReducer = combineReducers({

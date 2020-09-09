@@ -18,6 +18,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 export const ListProducts: FC = (props: any): JSX.Element => {
     const products = useSelector(selectorProduct);
     const dispatch = useDispatch();
+    const column = ['title', 'description', 'price', 'category', 'employee', 'reviews']
 
     useEffect(() => {
         dispatch({ 
@@ -29,24 +30,18 @@ export const ListProducts: FC = (props: any): JSX.Element => {
         <Table aria-label="customized table">
             <TableHead>
                 <TableRow>
-                    <TableCell>TITLE</TableCell>
-                    <TableCell>DESCRIPTION</TableCell>
-                    <TableCell>PRICE</TableCell>
-                    <TableCell>CATEGORY</TableCell>
-                    <TableCell>EMPLOYEE</TableCell>
-                    <TableCell>REVIEWS</TableCell>
+                    {column.map(col => ( // ciclo tutte le colonne in maniera da crearmi l'intestazione della tabella
+                        <TableCell>{col.toUpperCase()}</TableCell>
+                    ))}
                     <TableCell>-</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
                 { products.length ? products.map((prod: any) => (
                     <TableRow hover={true}>
-                        <TableCell size={"small"}>{prod.data.title}</TableCell>
-                        <TableCell size={"small"}>{prod.data.description}</TableCell>
-                        <TableCell size={"small"}>{prod.data.price}</TableCell>
-                        <TableCell size={"small"}>{prod.data.category}</TableCell>
-                        <TableCell size={"small"}>{prod.data.employee}</TableCell>
-                        <TableCell size={"small"}>{prod.data.description}</TableCell>
+                        {column.map(col => ( // ciclo tutte le colonne da renderizzare il contenuto della tabella
+                            <TableCell size={"small"}>{prod.data[col]}</TableCell>
+                        ))}
                         <TableCell size={"small"}>
                             <DeleteIcon
                                 fontSize="small"
