@@ -4,7 +4,7 @@ import {
  } from "./actions";
 
 export const reducerProductsList = (prevState: any = {}, action: any) => {
-    let clonedState = prevState
+    let clonedState = JSON.parse(JSON.stringify(prevState))
 
     // salvo il payload
     switch (action.type) {

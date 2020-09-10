@@ -3,8 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux"
-import { selectorProduct } from "../../redux/selectors"
+import { useDispatch } from "react-redux"
 import { ADD_ITEM } from '../../redux/actions'
 
 
@@ -32,11 +31,10 @@ interface IFormInput {
 
 function AddProduct() {
     const classes = useStyles();
-    const { register, handleSubmit } = useForm<IFormInput>();
-    // const products = useSelector(selectorProduct);
+    const { register, handleSubmit, reset } = useForm<IFormInput>();
     const dispatch = useDispatch();
     const onSubmit = (data: IFormInput) => {
-        console.log(data)
+        reset()
         dispatch({ 
             type: ADD_ITEM,
             payload: data
