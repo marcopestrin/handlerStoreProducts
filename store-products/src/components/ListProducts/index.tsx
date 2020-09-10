@@ -52,7 +52,7 @@ export const ListProducts: FC = (props: any): JSX.Element => {
                         <TableCell size={"small"}>
                             <DeleteIcon
                                 onClick={(e) => {
-                                    deleteItem(e)
+                                    deleteItem(prod)
                                 }}
                                 fontSize="small"
                             />

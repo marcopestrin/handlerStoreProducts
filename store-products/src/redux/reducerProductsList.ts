@@ -21,6 +21,11 @@ export const reducerProductsList = (prevState: any = {}, action: any) => {
             break;
         
         case REMOVE_ITEM:
+            clonedState.map((product: any, index: number) => {
+                if (product.id === action.payload.id) {
+                    clonedState.splice(index,1)
+                }
+            })
             break
 
         default:
