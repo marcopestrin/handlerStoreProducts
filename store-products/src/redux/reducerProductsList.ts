@@ -1,6 +1,7 @@
 import {
     FETCH_PRODUCTS_LIST_SUCCESS,
-    ADD_ITEM
+    ADD_ITEM,
+    REMOVE_ITEM
  } from "./actions";
 
 export const reducerProductsList = (prevState: any = {}, action: any) => {
@@ -18,6 +19,9 @@ export const reducerProductsList = (prevState: any = {}, action: any) => {
                 data: action.payload
             })
             break;
+        
+        case REMOVE_ITEM:
+            break
 
         default:
             break;

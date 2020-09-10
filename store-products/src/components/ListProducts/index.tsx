@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Typography from '@material-ui/core/Typography';
 
-import { FETCH_PRODUCTS_LIST_REQUEST } from '../../redux/actions'
+import { FETCH_PRODUCTS_LIST_REQUEST, REMOVE_ITEM } from '../../redux/actions'
 import { selectorProduct } from "../../redux/selectors"
 
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -25,6 +25,13 @@ export const ListProducts: FC = (props: any): JSX.Element => {
             type: FETCH_PRODUCTS_LIST_REQUEST
         });
       }, []);
+
+    function deleteItem (payload: any) {
+        dispatch({
+            type: REMOVE_ITEM,
+            payload
+        })
+    }
 
     return <TableContainer>
         <Table aria-label="customized table">
@@ -44,9 +51,12 @@ export const ListProducts: FC = (props: any): JSX.Element => {
                         ))}
                         <TableCell size={"small"}>
                             <DeleteIcon
+                                onClick={(e) => {
+                                    deleteItem(e)
+                                }}
                                 fontSize="small"
-                                onClick={() => { alert('clicked') }}
                             />
+                            
                         </TableCell>
                     </TableRow>
                 )) :
