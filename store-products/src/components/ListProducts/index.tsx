@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 
 import { FETCH_PRODUCTS_LIST_REQUEST, REMOVE_ITEM } from '../../redux/actions'
 import { selectorProduct } from "../../redux/selectors"
+import { DATA_KEY } from '../../config'
 
 import DeleteIcon from '@material-ui/icons/Delete';
 
@@ -18,7 +19,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 export const ListProducts: FC = (props: any): JSX.Element => {
     const products = useSelector(selectorProduct);
     const dispatch = useDispatch();
-    const column = ['title', 'description', 'price', 'category', 'employee', 'reviews']
 
     useEffect(() => {
         dispatch({ 
@@ -37,7 +37,7 @@ export const ListProducts: FC = (props: any): JSX.Element => {
         <Table aria-label="customized table">
             <TableHead>
                 <TableRow>
-                    {column.map(col => ( // ciclo tutte le colonne in maniera da crearmi l'intestazione della tabella
+                    {DATA_KEY.map(col => ( // ciclo tutte le colonne in maniera da crearmi l'intestazione della tabella
                         <TableCell>{col.toUpperCase()}</TableCell>
                     ))}
                     <TableCell>-</TableCell>
@@ -46,7 +46,7 @@ export const ListProducts: FC = (props: any): JSX.Element => {
             <TableBody>
                 { products.length ? products.map((prod: any) => (
                     <TableRow hover={true}>
-                        {column.map(col => ( // ciclo tutte le colonne da renderizzare il contenuto della tabella
+                        {DATA_KEY.map(col => ( // ciclo tutte le colonne da renderizzare il contenuto della tabella
                             <TableCell size={"small"}>{prod.data[col]}</TableCell>
                         ))}
                         <TableCell size={"small"}>
