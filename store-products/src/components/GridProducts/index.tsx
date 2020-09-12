@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 
 import { selectorProduct } from "../../redux/selectors"
 import { FETCH_PRODUCTS_LIST_REQUEST, REMOVE_ITEM } from '../../redux/actions'
@@ -30,30 +31,28 @@ export const GridProducts: FC = (props: any): JSX.Element => {
         })
     }
 
-    return <>
-        <Grid container spacing={3}>
+    return <Box>
+        <Grid container spacing={3} xs={12}>
             { products.length ? products.map((prod: any) => (
-                <>
-                    <Grid item xs={4}>
-                        <Card variant="outlined">
-                            <CardContent>
-                                {DATA_KEY.map(col => (
-                                    <Typography>{col.toUpperCase()}: {prod.data[col]}</Typography>
-                                ))}
-                            </CardContent>
-                            <CardActions>
-                                <Button
-                                    size="small"
-                                    color="secondary"
-                                    onClick={(e) => {
-                                        deleteItem(prod)
-                                    }}
-                                >DELETE ITEM</Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                </>
+                <Grid item xs={4} spacing={3}>
+                    <Card variant="outlined">
+                        <CardContent>
+                            {DATA_KEY.map(col => (
+                                <Typography color="primary">{col.toUpperCase()}: {prod.data[col]}</Typography>
+                            ))}
+                        </CardContent>
+                        <CardActions>
+                            <Button
+                                size="small"
+                                color="secondary"
+                                onClick={(e) => {
+                                    deleteItem(prod)
+                                }}
+                            >DELETE ITEM</Button>
+                        </CardActions>
+                    </Card>
+                </Grid>
             )): <>nooo</>}
         </Grid>
-    </>
+    </Box>
     }
