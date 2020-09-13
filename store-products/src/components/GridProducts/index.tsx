@@ -31,10 +31,10 @@ export const GridProducts: FC = (props: any): JSX.Element => {
         })
     }
 
-    return <Box>
-        <Grid container spacing={3} xs={12}>
+    return (
+        <Grid container spacing={6} xs={12}>
             { products.length ? products.map((prod: any) => (
-                <Grid item xs={4} spacing={3}>
+                <Grid item xs={4}>
                     <Card variant="outlined">
                         <CardContent>
                             {DATA_KEY.map(col => (
@@ -52,7 +52,9 @@ export const GridProducts: FC = (props: any): JSX.Element => {
                         </CardActions>
                     </Card>
                 </Grid>
-            )): <>nooo</>}
+            )): <Grid item xs={4}>
+                <Typography variant="body2" gutterBottom> DATA NOT AVAILABLE </Typography>
+            </Grid>}
         </Grid>
-    </Box>
-    }
+    )
+}
