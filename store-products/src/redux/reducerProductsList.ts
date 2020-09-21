@@ -14,10 +14,7 @@ export const reducerProductsList = (prevState: any = {}, action: any) => {
             break;
 
         case ADD_ITEM:
-            clonedState.push({
-                id: "EXAMPLEEE",
-                data: action.payload
-            })
+            clonedState.push(action.payload)
             break;
         
         case REMOVE_ITEM:

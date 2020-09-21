@@ -6,7 +6,7 @@ import {
 import { BASE_PATH, STORE_ID } from "../config"
 
 const getListProducts = async() => {
-    const response = await fetch(`${BASE_PATH}/stores/${STORE_ID}/products`)
+    const response = await fetch(`${BASE_PATH}`)
     return response.json()
 } 
 

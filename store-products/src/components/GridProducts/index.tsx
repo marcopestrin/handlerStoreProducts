@@ -7,7 +7,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 
 import { selectorProduct } from "../../redux/selectors"
 import { FETCH_PRODUCTS_LIST_REQUEST, REMOVE_ITEM } from '../../redux/actions'
@@ -16,7 +15,7 @@ import { DATA_KEY } from '../../config'
 export const GridProducts: FC = (props: any): JSX.Element => {
     const products = useSelector(selectorProduct);
     const dispatch = useDispatch();
-    const column = ['title', 'description', 'price', 'category', 'employee', 'reviews']
+    const { firstItem, lastItem } = props
 
     useEffect(() => {
         dispatch({ 
@@ -24,37 +23,46 @@ export const GridProducts: FC = (props: any): JSX.Element => {
         });
       }, []);
 
-    function deleteItem (payload: any) {
+    const deleteItem = (payload: any) => {
         dispatch({
             type: REMOVE_ITEM,
             payload
         })
     }
+    const NoData = () => {
+        return (
+            <Grid item xs={4}>
+                <Typography variant="body2" gutterBottom> DATA NOT AVAILABLE </Typography>
+            </Grid>
+        )
+    }
 
     return (
         <Grid container spacing={6} xs={12}>
-            { products.length ? products.map((prod: any) => (
-                <Grid item xs={4}>
-                    <Card variant="outlined">
-                        <CardContent>
-                            {DATA_KEY.map(col => (
-                                <Typography color="primary">{col.toUpperCase()}: {prod.data[col]}</Typography>
-                            ))}
-                        </CardContent>
-                        <CardActions>
-                            <Button
-                                size="small"
-                                color="secondary"
-                                onClick={(e) => {
-                                    deleteItem(prod)
-                                }}
-                            >DELETE ITEM</Button>
-                        </CardActions>
-                    </Card>
-                </Grid>
-            )): <Grid item xs={4}>
-                <Typography variant="body2" gutterBottom> DATA NOT AVAILABLE </Typography>
-            </Grid>}
+            { products.length ? products.map((prod: any, index: number) =>  {
+                if(index >= firstItem && index < lastItem) {
+                    return (
+                        <Grid item xs={4}>
+                            <Card variant="outlined">
+                                <CardContent>
+                                    {DATA_KEY.map(col => (
+                                        <Typography color="primary"><strong>{col.toUpperCase()}</strong>: {prod[col]}</Typography>
+                                    ))}
+                                </CardContent>
+                                <CardActions>
+                                    <Button
+                                        size="small"
+                                        color="secondary"
+                                        onClick={(e) => {
+                                            deleteItem(prod)
+                                        }}
+                                    >DELETE ITEM</Button>
+                                </CardActions>
+                            </Card>
+                        </Grid>
+                    )
+                }  
+            }) : <NoData /> }
         </Grid>
     )
 }
