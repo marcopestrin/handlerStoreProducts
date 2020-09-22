@@ -46,26 +46,40 @@ export const ListProducts: FC = (props: any): JSX.Element => {
         )
     }
 
+    const tableContent = (product: any) => {
+        return (
+            <>
+                {DATA_KEY.map((col: string, index: number) => (
+                    <TableCell
+                        key={index}
+                        size={"small"}
+                    >{product[col]}</TableCell>
+                ))}
+            </>
+        )
+    }
+
+    const deleteItemIcon = (product: object) => {
+        return (
+            <TableCell size={"small"}>
+                <DeleteIcon
+                    onClick={(e) => {
+                        deleteItem(product)
+                    }}
+                    fontSize="small"
+                />
+            </TableCell>
+        )
+    }
+
     const TBody = () => {
         return (
             <TableBody>
-                { products?.length ? products.map((prod: any, index: number) => (
+                { products?.length ? products.map((prod: object, index: number) => (
                     <TableRow hover={true} key={index} >
                         {(index >= firstItem && index < lastItem ) ? <>
-                            {DATA_KEY.map((col, index) => (
-                                <TableCell
-                                    key={index}
-                                    size={"small"}
-                                >{prod[col]}</TableCell>
-                            ))}
-                            <TableCell size={"small"}>
-                                <DeleteIcon
-                                    onClick={(e) => {
-                                        deleteItem(prod)
-                                    }}
-                                    fontSize="small"
-                                />
-                            </TableCell>
+                            { tableContent(prod) }
+                            { deleteItemIcon(prod) }
                         </> : <></> }
                     </TableRow>
                 )) : <NoData /> }

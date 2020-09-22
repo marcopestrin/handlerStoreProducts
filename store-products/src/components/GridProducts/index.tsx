@@ -29,32 +29,44 @@ export const GridProducts: FC = (props: any): JSX.Element => {
         )
     }
 
+    const deleteItemIcon = (product: any) => {
+        return (
+            <CardActions>
+                <Button
+                    size="small"
+                    color="secondary"
+                    onClick={(e) => {
+                        deleteItem(product)
+                    }}
+                >DELETE ITEM</Button>
+            </CardActions>
+        )
+    }
+
+    const cardContent = (product: any) => {
+        return (
+            <CardContent>
+                {DATA_KEY.map((col, index) => (
+                    <Typography
+                        key={index}
+                        color="primary"
+                    >
+                        <strong>{col.toUpperCase()}</strong>: {product[col]}
+                    </Typography>
+                ))}
+            </CardContent>
+        )
+    }
+
     return (
         <Grid container spacing={6}>
-            { products?.length ? products.map((prod: any, index: number) =>  {
+            { products?.length ? products.map((prod: object, index: number) =>  {
                 if(index >= firstItem && index < lastItem) {
                     return (
                         <Grid item xs={4} key={index}>
                             <Card variant="outlined">
-                                <CardContent>
-                                    {DATA_KEY.map((col, index) => (
-                                        <Typography
-                                            key={index}
-                                            color="primary"
-                                        >
-                                            <strong>{col.toUpperCase()}</strong>: {prod[col]}
-                                        </Typography>
-                                    ))}
-                                </CardContent>
-                                <CardActions>
-                                    <Button
-                                        size="small"
-                                        color="secondary"
-                                        onClick={(e) => {
-                                            deleteItem(prod)
-                                        }}
-                                    >DELETE ITEM</Button>
-                                </CardActions>
+                                { cardContent(prod) }
+                                { deleteItemIcon(prod) }
                             </Card>
                         </Grid>
                     )
