@@ -1,5 +1,5 @@
-import React, { useEffect, FC } from 'react'
-import { useSelector, useDispatch } from "react-redux"
+import React, { FC } from 'react'
+import { useDispatch } from "react-redux"
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -8,8 +8,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
-import { selectorProduct } from "../../redux/selectors"
-import { FETCH_PRODUCTS_LIST_REQUEST, REMOVE_ITEM } from '../../redux/actions'
+import { REMOVE_ITEM } from '../../redux/actions'
 import { DATA_KEY } from '../../config'
 
 export const GridProducts: FC = (props: any): JSX.Element => {
