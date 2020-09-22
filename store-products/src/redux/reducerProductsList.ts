@@ -7,20 +7,24 @@ import {
 export const reducerProductsList = (prevState: any = {}, action: any) => {
     let clonedState = JSON.parse(JSON.stringify(prevState))
 
-    // salvo il payload
     switch (action.type) {
+        case '@@INIT':
+            clonedState.loading = true;
+            break
+
         case FETCH_PRODUCTS_LIST_SUCCESS:
-            clonedState = action.payload;
+            clonedState.products = action.payload;
+            clonedState.loading = false;
             break;
 
         case ADD_ITEM:
-            clonedState.push(action.payload)
+            clonedState.products.push(action.payload)
             break;
         
         case REMOVE_ITEM:
-            clonedState.map((product: any, index: number) => {
+            clonedState.products.map((product: any, index: number) => {
                 if (product.id === action.payload.id) {
-                    clonedState.splice(index,1)
+                    clonedState.products.splice(index,1)
                 }
             })
             break
@@ -28,5 +32,6 @@ export const reducerProductsList = (prevState: any = {}, action: any) => {
         default:
             break;
     }
+
     return clonedState;
 };

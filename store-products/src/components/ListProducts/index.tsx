@@ -1,5 +1,5 @@
-import React, { useEffect, FC } from 'react'
-import { useSelector, useDispatch } from "react-redux"
+import React, { FC } from 'react'
+import { useDispatch } from "react-redux"
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,23 +9,14 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Typography from '@material-ui/core/Typography';
 
-import { FETCH_PRODUCTS_LIST_REQUEST, REMOVE_ITEM } from '../../redux/actions'
-import { selectorProduct } from "../../redux/selectors"
+import { REMOVE_ITEM } from '../../redux/actions'
 import { DATA_KEY } from '../../config'
 
 import DeleteIcon from '@material-ui/icons/Delete';
 
-// componente REACT della lista dei prodotti
 export const ListProducts: FC = (props: any): JSX.Element => {
-    const products = useSelector(selectorProduct);
     const dispatch = useDispatch();
-    const { firstItem, lastItem } = props
-
-    useEffect(() => {
-        dispatch({ 
-            type: FETCH_PRODUCTS_LIST_REQUEST
-        });
-      }, []);
+    const { firstItem, lastItem, products } = props
 
     function deleteItem (payload: any) {
         dispatch({
@@ -58,7 +49,7 @@ export const ListProducts: FC = (props: any): JSX.Element => {
     const TBody = () => {
         return (
             <TableBody>
-                { products.length ? products.map((prod: any, index: number) => (
+                { products?.length ? products.map((prod: any, index: number) => (
                     <TableRow hover={true}>
                         {(index >= firstItem && index < lastItem ) ? <>
                             {DATA_KEY.map(col => ( // ciclo tutte le colonne da renderizzare il contenuto della tabella

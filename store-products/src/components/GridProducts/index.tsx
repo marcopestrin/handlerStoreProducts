@@ -13,15 +13,8 @@ import { FETCH_PRODUCTS_LIST_REQUEST, REMOVE_ITEM } from '../../redux/actions'
 import { DATA_KEY } from '../../config'
 
 export const GridProducts: FC = (props: any): JSX.Element => {
-    const products = useSelector(selectorProduct);
     const dispatch = useDispatch();
-    const { firstItem, lastItem } = props
-
-    useEffect(() => {
-        dispatch({ 
-            type: FETCH_PRODUCTS_LIST_REQUEST
-        });
-      }, []);
+    const { firstItem, lastItem, products } = props
 
     const deleteItem = (payload: any) => {
         dispatch({
@@ -39,7 +32,7 @@ export const GridProducts: FC = (props: any): JSX.Element => {
 
     return (
         <Grid container spacing={6} xs={12}>
-            { products.length ? products.map((prod: any, index: number) =>  {
+            { products?.length ? products.map((prod: any, index: number) =>  {
                 if(index >= firstItem && index < lastItem) {
                     return (
                         <Grid item xs={4}>

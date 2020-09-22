@@ -3,7 +3,7 @@ import {
   FETCH_PRODUCTS_LIST_FAILURE,
   FETCH_PRODUCTS_LIST_SUCCESS
 } from "./actions";
-import { BASE_PATH, STORE_ID } from "../config"
+import { BASE_PATH } from "../config"
 
 const getListProducts = async() => {
     const response = await fetch(`${BASE_PATH}`)
@@ -12,14 +12,13 @@ const getListProducts = async() => {
 
 export function* getProductsList() {
   try {
-
     // ottengo tutta la lista dei prodotti tramite una chiamata asincrona
     const payload = yield call(getListProducts)
     yield put({
       type: FETCH_PRODUCTS_LIST_SUCCESS,
       payload
     });
-
+    
   } catch (e) {
 
     yield put({

@@ -1,1 +1,3 @@
-export const selectorProduct = (state: any) => state.products;
+export const selectorProduct = (state: any) => { 
+    return state.items
+};
