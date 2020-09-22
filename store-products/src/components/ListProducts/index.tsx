@@ -37,8 +37,8 @@ export const ListProducts: FC = (props: any): JSX.Element => {
         return (
             <TableHead>
                 <TableRow>
-                    {DATA_KEY.map(col => ( // ciclo tutte le colonne in maniera da crearmi l'intestazione della tabella
-                        <TableCell>{col.toUpperCase()}</TableCell>
+                    {DATA_KEY.map((col, index) => (
+                        <TableCell key={index}>{col.toUpperCase()}</TableCell>
                     ))}
                     <TableCell>-</TableCell>
                 </TableRow>
@@ -50,10 +50,13 @@ export const ListProducts: FC = (props: any): JSX.Element => {
         return (
             <TableBody>
                 { products?.length ? products.map((prod: any, index: number) => (
-                    <TableRow hover={true}>
+                    <TableRow hover={true} key={index} >
                         {(index >= firstItem && index < lastItem ) ? <>
-                            {DATA_KEY.map(col => ( // ciclo tutte le colonne da renderizzare il contenuto della tabella
-                                <TableCell size={"small"}>{prod[col]}</TableCell>
+                            {DATA_KEY.map((col, index) => (
+                                <TableCell
+                                    key={index}
+                                    size={"small"}
+                                >{prod[col]}</TableCell>
                             ))}
                             <TableCell size={"small"}>
                                 <DeleteIcon

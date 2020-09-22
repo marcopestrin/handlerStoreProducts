@@ -30,15 +30,20 @@ export const GridProducts: FC = (props: any): JSX.Element => {
     }
 
     return (
-        <Grid container spacing={6} xs={12}>
+        <Grid container spacing={6}>
             { products?.length ? products.map((prod: any, index: number) =>  {
                 if(index >= firstItem && index < lastItem) {
                     return (
-                        <Grid item xs={4}>
+                        <Grid item xs={4} key={index}>
                             <Card variant="outlined">
                                 <CardContent>
-                                    {DATA_KEY.map(col => (
-                                        <Typography color="primary"><strong>{col.toUpperCase()}</strong>: {prod[col]}</Typography>
+                                    {DATA_KEY.map((col, index) => (
+                                        <Typography
+                                            key={index}
+                                            color="primary"
+                                        >
+                                            <strong>{col.toUpperCase()}</strong>: {prod[col]}
+                                        </Typography>
                                     ))}
                                 </CardContent>
                                 <CardActions>
