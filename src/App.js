@@ -9,6 +9,7 @@ import { selectorProduct } from "./redux/selectors"
 import { MAIN_LABEL, ALTERNATIVE_LABEL} from './config'
 import { FETCH_PRODUCTS_LIST_REQUEST } from './redux/actions'
 
+import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -99,11 +100,51 @@ function App() {
       )
   }
 
+  const ChangeOffset = (e) => {
+    setOffset(e.target.value)
+  }
+
+  const CustomOffset = () => {
+    const breakpoint = [
+      { value: '10', label: '10' },
+      { value: '15', label: '15' },
+      { value: '20', label: '20' },
+      { value: '25', label: '25' },
+    ]
+    return (
+      <>
+        <Grid item xs={10}></Grid>
+        <Grid item xs={2}>
+          <TextField
+            label="Items"
+            variant="outlined"
+            name="offset"
+            size="small"
+            select
+            fullWidth
+            value={offset}
+            SelectProps={{
+              native: true,
+            }}
+            onChange={ChangeOffset}
+          >
+            {breakpoint.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </TextField>
+        </Grid>
+      </>
+    )
+  }
+
   return (
     <Container maxWidth="lg">
       <Grid container spacing={2}>
         { <TitlePage /> }
         { <ButtonChangeView /> }
+        {loading ? <CircularProgress /> : <CustomOffset /> }
         {loading ? <CircularProgress /> : contentDataToRender(products) }
         {loading ? <CircularProgress /> : <CustomPagination /> }
         { <NewProduct /> }
